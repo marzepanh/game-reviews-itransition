@@ -18,8 +18,17 @@
             </form>
 
             <div class="text-end">
-                <button type="button" class="btn btn-outline-light me-2">Login</button>
-                <button type="button" class="btn btn-warning">Sign-up</button>
+                <a type="button" class="btn btn-outline-light me-2"  href="{{ path('app_login') }}">Login</a>
+                <a type="button" class="btn btn-warning" href="{{ path('app_register') }}">Sign-up</a>
+{#                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                        Login with
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><a class="dropdown-item" href="{{ path('connect_facebook_start') }}">Facebook</a></li>
+                        <li><a class="dropdown-item" href="#">Google</a></li>
+                    </ul>
+                </div>#}
             </div>
         </div>
     </div>
