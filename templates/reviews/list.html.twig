@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}All Products{% endblock %}
+
+{% block body %}
+    <div class="container mt-3">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="m-0 font-weight-bold">Your Reviews</p>
+                <a href="{{ path('reviews_review_add') }}" class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">
+                    Add new
+                </a>
+            </div>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered" id="main_table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Tags</th>
+                        <th scope="col">Cover</th>
+                        <th scope="col">Author grade</th>
+                        <th scope="col">Users grade</th>
+                        <th scope="col">Likes</th>
+                        <th></th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% set i = 0 %}
+                    {% for review in reviews %}
+                        {% set i = i + 1 %}
+                        <tr>
+                            <th scope="row">{{ i }}</th>
+                            <td>{% if review.reviewGroup %}{{ review.reviewGroup }}{% endif %}</td>
+                            <td>{{ review.name }}</td>
+                            <td>Example Tag</td>
+                            <td>{{ review.cover }}</td>
+                            <td>{{ review.authorGrade }}</td>
+                            <td>{{ review.usersGrade }}</td>
+                            <td>{{ review.likesAmount }}</td>
+                            <td>
+                                <a href="{{ path('reviews_review_edit', { "id":review.id }) }}"
+                                   class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">Edit
+                                </a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

@@ -37,6 +37,16 @@ class Review
     #[ORM\Column(type: 'integer')]
     private $likesAmount;
 
+    #[ORM\Column(type: 'string', length: 255)]
+    private $cover;
+
+    #[ORM\Column(type: 'string', length: 255)]
+    private $author;
+
+    #[ORM\ManyToOne(targetEntity: Category::class, inversedBy: 'reviews')]
+    #[ORM\JoinColumn(nullable: false)]
+    private $category;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -137,4 +147,41 @@ class Review
 
         return $this;
     }
+
+    public function getCover(): ?string
+    {
+        return $this->cover;
+    }
+
+    public function setCover(string $cover): self
+    {
+        $this->cover = $cover;
+
+        return $this;
+    }
+
+    public function getAuthor(): ?string
+    {
+        return $this->author;
+    }
+
+    public function setAuthor(string $author): self
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    public function getCategory(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?Category $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
 }

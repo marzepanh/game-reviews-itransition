@@ -100,12 +100,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFacebookId(): ?int
+    public function getFacebookId(): ?string
     {
         return $this->facebookId;
     }
 
-    public function setFacebookId(int $facebookId): self
+    public function setFacebookId(string $facebookId): self
     {
         $this->facebookId = $facebookId;
 

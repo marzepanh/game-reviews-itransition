@@ -6,30 +6,27 @@
             </a>
 
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
+                <li><a href="{{ path('main') }}" class="nav-link px-2 text-secondary">Home</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                {% if is_granted('ROLE_ADMIN') %}
+                <li><a href="{{ path('admin') }}" class="nav-link px-2 text-white">Admin Panel</a></li>
+                {% endif %}
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
                 <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
             </form>
 
+            {% if not app.user %}
             <div class="text-end">
                 <a type="button" class="btn btn-outline-light me-2"  href="{{ path('app_login') }}">Login</a>
                 <a type="button" class="btn btn-warning" href="{{ path('app_register') }}">Sign-up</a>
-{#                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                        Login with
-                    </button>
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><a class="dropdown-item" href="{{ path('connect_facebook_start') }}">Facebook</a></li>
-                        <li><a class="dropdown-item" href="#">Google</a></li>
-                    </ul>
-                </div>#}
             </div>
+            {% else %}
+                <p class="text-right m-2"><a href="{{ path('reviews_reviews_list') }}">{{ app.user.email }}</a>, <a href="{{ path('app_logout') }}" class="badge badge-warning">Logout</a></p>
+            {% endif %}
         </div>
     </div>
 </header>

@@ -1,0 +1,114 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit Product{% endblock %}
+{% block cannonical %}
+
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-3">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <p class="m-0 font-weight-bold">Edit Review</p>
+{#                <a href="{{ path('reviews_review_add') }}" class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">
+                    Add new
+                </a>#}
+            </div>
+        </div>
+
+        <div class="card-body">
+            {{ form_start(form) }}
+
+            <div class="form-group col-4 mb-2">
+                <label for="exampleFormControlInput1">Review name</label>
+                    {{ form_widget(form.name) }}
+                    <div class="form-error">
+                        {{ form_errors(form.name) }}
+                    </div>
+            </div>
+
+            <div class="form-group col-4 mb-2">
+                <label for="exampleFormControlInput1">Cover</label>
+                {{ form_widget(form.cover) }}
+                <div class="form-error">
+                    {{ form_errors(form.cover) }}
+                </div>
+            </div>
+
+            <div class="form-group col-4 mb-2">
+                <label for="exampleFormControlInput1">Review Group</label>
+                {{ form_widget(form.reviewGroup) }}
+                <div class="form-error">
+                    {{ form_errors(form.reviewGroup) }}
+                </div>
+            </div>
+
+            <div class="form-group col-4 mb-2">
+                <label for="exampleFormControlInput1">Tags</label>
+                {{ form_widget(form.tags) }}
+                <div class="form-error">
+                    {{ form_errors(form.tags) }}
+                </div>
+            </div>
+
+            <div class="form-group col-4 mb-2">
+                <label for="exampleFormControlInput1">Review text</label>
+                {{ form_widget(form.text) }}
+                <div class="form-error">
+                    {{ form_errors(form.text) }}
+                </div>
+            </div>
+
+            <div class="form-group col-4 mb-2">
+                <label for="exampleFormControlInput1">Images</label>
+                {{ form_widget(form.images) }}
+                <div class="form-error">
+                    {{ form_errors(form.images) }}
+                </div>
+            </div>
+
+            <div class="form-group col-4 mb-2">
+                {{ form_widget(form.authorGrade) }}
+                <label for="input-id">Grade</label><input id="input-id" class="rating" type="text">
+            </div>
+
+            <div class="form-group row">
+                <div class="col-md-1"></div>
+                <div class="col-md-11 pl-5">
+                    {{ form_widget(form.submit) }}
+                </div>
+            </div>
+
+            {{ form_rest(form) }}
+            {{ form_end(form) }}
+        </div>
+
+    </div>
+    </div>
+
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        (function($) {
+            console.log("a")
+            $("#input-id").rating({
+                min:0,
+                max:5,
+                step:1,
+                size:'md',
+                starCaptions: {
+                    1: 'Very bad',
+                    2: 'Poor',
+                    3: 'OK',
+                    4: 'Good',
+                    5: 'Excellent'
+                },
+                showClear: false,
+
+            });
+        })(jQuery);
+    </script>
+{% endblock %}
