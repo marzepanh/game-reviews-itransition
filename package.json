@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "bootstrap": "^5.1.3"
+  },
+  "dependencies": {
+    "krajee-markdown-editor": "^1.0.0"
   }
 }

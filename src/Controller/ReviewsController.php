@@ -34,7 +34,7 @@ class ReviewsController extends AbstractController
         /** @var User $user */
         $user = $this->getUser();
 
-        $reviews = $reviewRepository->findBy(['author' => $user->getEmail()]);
+        $reviews = $reviewRepository->findBy(['author' => $user->getEmail(), 'isDeleted' => false]);
         return $this->render('reviews/list.html.twig', [
             'reviews' => $reviews
         ]);
@@ -57,16 +57,18 @@ class ReviewsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
+            //dd($form);
             $review = $form->getData();
 
             $review->setAuthor($user->getEmail());
             $review->setUsersGrade(0);
             $review->setLikesAmount(0);
+            $review->setIsDeleted(false);
 
             $entityManager->persist($review);
             $entityManager->flush();
 
-            return $this->redirectToRoute('reviews_reviews_list', ['id' => $review->getId()]);
+            return $this->redirectToRoute('reviews_reviews_list');
         }
         return $this->renderForm('reviews/edit.html.twig', [
             'form' => $form,
@@ -76,11 +78,15 @@ class ReviewsController extends AbstractController
     /**
      * @Route("/delete/{id}", name="review_delete")
      */
-    public function delete(): Response
+    public function delete(ManagerRegistry $doctrine, Review $review): Response
     {
-/*        return $this->render('reviews/list.html.twig', [
-            'controller_name' => 'ReviewsController',
-        ]);*/
+        $entityManager = $doctrine->getManager();
+
+        $review->setIsDeleted(true);
+        $entityManager->persist($review);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('reviews_reviews_list');
     }
 }
 

@@ -35,7 +35,7 @@
                         {% set i = i + 1 %}
                         <tr>
                             <th scope="row">{{ i }}</th>
-                            <td>{% if review.reviewGroup %}{{ review.reviewGroup }}{% endif %}</td>
+                            <td>{% if review.getCategory %}{{ review.getCategory }}{% endif %}</td>
                             <td>{{ review.name }}</td>
                             <td>Example Tag</td>
                             <td>{{ review.cover }}</td>
@@ -46,6 +46,27 @@
                                 <a href="{{ path('reviews_review_edit', { "id":review.id }) }}"
                                    class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">Edit
                                 </a>
+                                <a href="{{ path('reviews_review_delete', { "id":review.id }) }}"
+                                   class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">Delete
+                                </a>
+{#                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="{{ path('reviews_review_edit', { "id":review.id }) }}">Edit</a>
+                                        <a class="dropdown-item" href="{{ path('reviews_review_delete', { "id":review.id }) }}">Delete</a>
+                                    </div>
+                                </div>#}
+{#                                <div class="dropdown">
+                                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        Dropdown button
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        <a class="dropdown-item" href="#">Action</a>
+                                        <a class="dropdown-item" href="#">Another action</a>
+                                        <a class="dropdown-item" href="#">Something else here</a>
+                                    </div>
+                                </div>#}
                             </td>
                         </tr>
                     {% endfor %}

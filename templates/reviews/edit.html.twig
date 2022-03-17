@@ -6,9 +6,17 @@
 {% endblock %}
 
 {% block body %}
+{#    <style>
+        .markdownField {
+            row: 15;
+            width: 600px;
+            height: 600px;
+        }
+    </style>#}
 
     <div class="container mt-3">
     <div class="card shadow mb-4">
+
         <div class="card-header py-3">
             <div class="d-flex justify-content-between align-items-center">
                 <p class="m-0 font-weight-bold">Edit Review</p>
@@ -39,9 +47,9 @@
 
             <div class="form-group col-4 mb-2">
                 <label for="exampleFormControlInput1">Review Group</label>
-                {{ form_widget(form.reviewGroup) }}
+                {{ form_widget(form.category) }}
                 <div class="form-error">
-                    {{ form_errors(form.reviewGroup) }}
+                    {{ form_errors(form.category) }}
                 </div>
             </div>
 
@@ -53,7 +61,7 @@
                 </div>
             </div>
 
-            <div class="form-group col-4 mb-2">
+            <div class="form-group mb-2">
                 <label for="exampleFormControlInput1">Review text</label>
                 {{ form_widget(form.text) }}
                 <div class="form-error">
@@ -69,22 +77,20 @@
                 </div>
             </div>
 
-            <div class="form-group col-4 mb-2">
-                {{ form_widget(form.authorGrade) }}
-                <label for="input-id">Grade</label><input id="input-id" class="rating" type="text">
-            </div>
-
-            <div class="form-group row">
-                <div class="col-md-1"></div>
-                <div class="col-md-11 pl-5">
-                    {{ form_widget(form.submit) }}
+            <div class="form-group mb-2">
+                <label for="review_form_authorGrade">Grade</label>
+                {{ form_widget(form.authorGrade, {'attr': {'class': 'rating'}}) }}
+                <div class="form-error">
+                    {{ form_errors(form.authorGrade) }}
                 </div>
             </div>
 
+            {{ form_widget(form.submit) }}
+
             {{ form_rest(form) }}
             {{ form_end(form) }}
-        </div>
 
+        </div>
     </div>
     </div>
 
@@ -93,8 +99,7 @@
 {% block javascripts %}
     <script>
         (function($) {
-            console.log("a")
-            $("#input-id").rating({
+            $("#review_form_authorGrade").rating({
                 min:0,
                 max:5,
                 step:1,
@@ -109,6 +114,7 @@
                 showClear: false,
 
             });
+            $("#review_form_text").markdownEditor({useTwemoji: true});
         })(jQuery);
     </script>
 {% endblock %}

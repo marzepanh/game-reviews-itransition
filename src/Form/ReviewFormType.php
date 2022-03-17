@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Config\ReviewGroup;
 use App\Entity\Review;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\EnumType;
@@ -37,10 +38,16 @@ class ReviewFormType extends AbstractType
                     'class' => 'form-control',
                 ],
             ]) //FileType
-            //->add('reviewGroup', EnumType::class, ['class' => ReviewGroup::class])
-            ->add('reviewGroup', TextType::class)
+
+            ->add('category', EntityType::class, [
+                'class' => 'App\Entity\Category'
+            ])
             ->add('tags', CollectionType::class)
-            ->add('text', TextareaType::class)
+            ->add('text', TextareaType::class, [
+                'attr' => [
+                    'rows' => '15'
+                ],
+            ])
             ->add('images', TextType::class) //FileType
             ->add('authorGrade', NumberType::class, [
                 'row_attr' => [

@@ -157,5 +157,23 @@
     <orderEntry type="library" name="theme" level="application" />
     <orderEntry type="library" name="jquery-3.6.0" level="application" />
     <orderEntry type="library" name="LANG" level="application" />
+    <orderEntry type="library" name="markdown-editor" level="application" />
+    <orderEntry type="library" name="highlight" level="application" />
+    <orderEntry type="library" name="markdown-it-emoji" level="application" />
+    <orderEntry type="library" name="markdown-it-cjk-breaks" level="application" />
+    <orderEntry type="library" name="markdown-it-checkbox" level="application" />
+    <orderEntry type="library" name="markdown-it-smartarrows" level="application" />
+    <orderEntry type="library" name="markdown-it-mark" level="application" />
+    <orderEntry type="library" name="markdown-it-ins" level="application" />
+    <orderEntry type="library" name="markdown-it-sup" level="application" />
+    <orderEntry type="library" name="markdown-it-sub" level="application" />
+    <orderEntry type="library" name="markdown-it-abbr" level="application" />
+    <orderEntry type="library" name="markdown-it-footnote" level="application" />
+    <orderEntry type="library" name="markdown-it-deflist" level="application" />
+    <orderEntry type="library" name="markdown-it" level="application" />
+    <orderEntry type="library" name="purify" level="application" />
+    <orderEntry type="library" name="twemoji" level="application" />
+    <orderEntry type="library" name="all" level="application" />
+    <orderEntry type="library" name="jquery-3.2.1" level="application" />
   </component>
 </module>

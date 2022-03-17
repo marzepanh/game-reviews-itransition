@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ReviewRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReviewRepository::class)]
 class Review
@@ -13,21 +14,27 @@ class Review
     #[ORM\Column(type: 'integer')]
     private $id;
 
+    /**
+     * @Assert\NotBlank
+     */
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
-
-    #[ORM\Column(type: 'string', length: 255)]
-    private $reviewGroup;
 
     #[ORM\Column(type: 'array')]
     private $tags = [];
 
+    /**
+     * @Assert\NotBlank
+     */
     #[ORM\Column(type: 'text')]
     private $text;
 
     #[ORM\Column(type: 'string', length: 255)]
     private $images;
 
+    /**
+     * @Assert\NotBlank
+     */
     #[ORM\Column(type: 'decimal', precision: 2, scale: 1)]
     private $authorGrade;
 
@@ -47,6 +54,9 @@ class Review
     #[ORM\JoinColumn(nullable: false)]
     private $category;
 
+    #[ORM\Column(type: 'boolean')]
+    private $isDeleted;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -60,18 +70,6 @@ class Review
     public function setName(string $name): self
     {
         $this->name = $name;
-
-        return $this;
-    }
-
-    public function getReviewGroup(): ?string
-    {
-        return $this->reviewGroup;
-    }
-
-    public function setReviewGroup(string $reviewGroup): self
-    {
-        $this->reviewGroup = $reviewGroup;
 
         return $this;
     }
@@ -180,6 +178,18 @@ class Review
     public function setCategory(?Category $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getIsDeleted(): ?bool
+    {
+        return $this->isDeleted;
+    }
+
+    public function setIsDeleted(bool $isDeleted): self
+    {
+        $this->isDeleted = $isDeleted;
 
         return $this;
     }
