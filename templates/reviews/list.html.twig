@@ -43,12 +43,16 @@
                             <td>{{ review.usersGrade }}</td>
                             <td>{{ review.likesAmount }}</td>
                             <td>
+                                <a href="{{ path('reviews_review_show', { "id":review.id }) }}"
+                                   class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">Show
+                                </a>
                                 <a href="{{ path('reviews_review_edit', { "id":review.id }) }}"
                                    class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">Edit
                                 </a>
                                 <a href="{{ path('reviews_review_delete', { "id":review.id }) }}"
                                    class="d-none d-sm-inline-block btn btn-outline-dark shadow-sm">Delete
                                 </a>
+
 {#                                <div class="dropdown">
                                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     </button>

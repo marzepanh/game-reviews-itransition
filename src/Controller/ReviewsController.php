@@ -88,6 +88,17 @@ class ReviewsController extends AbstractController
 
         return $this->redirectToRoute('reviews_reviews_list');
     }
+
+    /**
+     * @Route("/show/{id}", name="review_show")
+     */
+    public function show(Review $review): Response
+    {
+
+        return $this->render('reviews/show.html.twig', [
+            'review' => $review
+        ]);
+    }
 }
 
 
