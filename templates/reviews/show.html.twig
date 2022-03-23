@@ -16,13 +16,14 @@
                         <h1 class="fw-bolder mb-1">{{ review.name }}</h1>
                         <!-- Post meta content-->
 
+                        <div class="text-muted fst-italic mb-2">Category: {{ review.category }}</div>
                         <div class="text-muted fst-italic mb-2">Posted by {{ review.author|split('@')[0] }}</div>
                         <!-- Post categories-->
                         <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
                         <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
                     </header>
                     <!-- Preview image figure-->
-                    <figure class="mb-4"><img class="img-fluid rounded" src="https://dummyimage.com/900x400/ced4da/6c757d.jpg" alt="..." /></figure>
+                    <figure class="mb-4"><img class="img-fluid rounded" src="{{ asset('uploads/' ~ review.cover) }}" width="900" height="400"/></figure>
                     <!-- Post content-->
                     <section class="mb-5">
                         {% apply markdown_to_html %}

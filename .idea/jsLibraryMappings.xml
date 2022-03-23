@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="JavaScriptLibraryMappings">
+    <file url="PROJECT" libraries="{LANG, all, highlight, jquery-3.2.1, jquery-3.6.0, markdown-editor, markdown-it, markdown-it-abbr, markdown-it-checkbox, markdown-it-cjk-breaks, markdown-it-deflist, markdown-it-emoji, markdown-it-footnote, markdown-it-ins, markdown-it-mark, markdown-it-smartarrows, markdown-it-sub, markdown-it-sup, purify, star-rating, theme, twemoji}" />
+  </component>
+</project>

@@ -16,6 +16,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\File;
 
 class ReviewFormType extends AbstractType
 {
@@ -30,19 +31,24 @@ class ReviewFormType extends AbstractType
                     'class' => 'form-control',
                 ],
             ])
-            ->add('cover', TextType::class, [
-                'attr' => [
-                    'placeholder' => 'Cover',
-                ],
-                'row_attr' => [
-                    'class' => 'form-control',
-                ],
+            ->add('cover', FileType::class, [
+                'mapped' => false,
+/*                'constraints' => [
+                    new File([
+                        'maxSize' => '1024k',
+                        'mimeTypes' => [
+                            'application/pdf',
+                            'application/x-pdf',
+                        ],
+                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                    ])
+                ],*/
             ]) //FileType
 
             ->add('category', EntityType::class, [
                 'class' => 'App\Entity\Category'
             ])
-            ->add('tags', CollectionType::class)
+            ->add('reviewTags', CollectionType::class)
             ->add('text', TextareaType::class, [
                 'attr' => [
                     'rows' => '15'

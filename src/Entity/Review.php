@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReviewRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,9 +21,6 @@ class Review
      */
     #[ORM\Column(type: 'string', length: 255)]
     private $name;
-
-    #[ORM\Column(type: 'array')]
-    private $tags = [];
 
     /**
      * @Assert\NotBlank
@@ -57,6 +56,14 @@ class Review
     #[ORM\Column(type: 'boolean')]
     private $isDeleted;
 
+    #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'reviews')]
+    private $reviewTags;
+
+    public function __construct()
+    {
+        $this->reviewTags = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,17 +81,6 @@ class Review
         return $this;
     }
 
-    public function getTags(): ?array
-    {
-        return $this->tags;
-    }
-
-    public function setTags(array $tags): self
-    {
-        $this->tags = $tags;
-
-        return $this;
-    }
 
     public function getText(): ?string
     {
@@ -190,6 +186,30 @@ class Review
     public function setIsDeleted(bool $isDeleted): self
     {
         $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tags>
+     */
+    public function getReviewTags(): Collection
+    {
+        return $this->reviewTags;
+    }
+
+    public function addReviewTag(Tags $reviewTag): self
+    {
+        if (!$this->reviewTags->contains($reviewTag)) {
+            $this->reviewTags[] = $reviewTag;
+        }
+
+        return $this;
+    }
+
+    public function removeReviewTag(Tags $reviewTag): self
+    {
+        $this->reviewTags->removeElement($reviewTag);
 
         return $this;
     }

@@ -7,8 +7,10 @@ use App\Entity\Review;
 use App\Entity\User;
 use App\Form\ReviewFormType;
 use App\Repository\ReviewRepository;
+use App\Service\FileUploader;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -47,7 +49,7 @@ class ReviewsController extends AbstractController
      * @param Review|null $review
      * @return Response
      */
-    public function edit(ManagerRegistry $doctrine, Request $request, Review $review = null): Response
+    public function edit(ManagerRegistry $doctrine, Request $request, FileUploader $fileUploader, Review $review = null): Response
     {
         /** @var User $user */
         $user = $this->getUser();
@@ -57,8 +59,17 @@ class ReviewsController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            //dd($form);
             $review = $form->getData();
+
+            //upload cover
+            /** @var UploadedFile $cover */
+            $cover = $form->get('cover')->getData();
+/*            echo "<pre>";
+            var_dump($cover); die;*/
+            if ($cover) {
+                $coverFileName = $fileUploader->upload($cover);
+                $review->setCover($coverFileName);
+            }
 
             $review->setAuthor($user->getEmail());
             $review->setUsersGrade(0);

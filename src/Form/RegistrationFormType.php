@@ -13,16 +13,16 @@ use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
 use Symfony\Component\Validator\Constraints\NotBlank;
 
-class RegistrationFormType extends AbstractType
+class   RegistrationFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
             ->add('email', EmailType::class, [
                 'required' => true,
-                'label' => false,
+                'label' => 'Email address *',
                 'attr' => [
-                    'class' => 'form-control text-center',
+                    'class' => 'form-control',
                     'autofocus' => 'autofocus',
                     'placeholder' => 'Enter your email'
                 ]
@@ -39,10 +39,10 @@ class RegistrationFormType extends AbstractType
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'required' => true,
-                'label' => false,
+                'label' => 'Password *',
                 'mapped' => false,
                 'attr' => [
-                    'class' => 'form-control text-center',
+                    'class' => 'form-control ',
                     'autocomplete' => 'new-password',
                     'placeholder' => 'Enter password'
                 ],

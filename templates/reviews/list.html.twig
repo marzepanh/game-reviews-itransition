@@ -38,7 +38,7 @@
                             <td>{% if review.getCategory %}{{ review.getCategory }}{% endif %}</td>
                             <td>{{ review.name }}</td>
                             <td>Example Tag</td>
-                            <td>{{ review.cover }}</td>
+                            <td><img src="{{ asset('uploads/' ~ review.cover) }}" width="200" height="100%"></td>
                             <td>{{ review.authorGrade }}</td>
                             <td>{{ review.usersGrade }}</td>
                             <td>{{ review.likesAmount }}</td>
