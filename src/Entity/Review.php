@@ -28,9 +28,6 @@ class Review
     #[ORM\Column(type: 'text')]
     private $text;
 
-    #[ORM\Column(type: 'string', length: 255)]
-    private $images;
-
     /**
      * @Assert\NotBlank
      */
@@ -58,6 +55,9 @@ class Review
 
     #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'reviews')]
     private $reviewTags;
+
+    #[ORM\Column(type: 'array', nullable: true)]
+    private $images = [];
 
     public function __construct()
     {
@@ -94,17 +94,6 @@ class Review
         return $this;
     }
 
-    public function getImages(): ?string
-    {
-        return $this->images;
-    }
-
-    public function setImages(string $images): self
-    {
-        $this->images = $images;
-
-        return $this;
-    }
 
     public function getAuthorGrade(): ?string
     {
@@ -210,6 +199,18 @@ class Review
     public function removeReviewTag(Tags $reviewTag): self
     {
         $this->reviewTags->removeElement($reviewTag);
+
+        return $this;
+    }
+
+    public function getImages(): ?array
+    {
+        return $this->images;
+    }
+
+    public function setImages(?array $images): self
+    {
+        $this->images = $images;
 
         return $this;
     }

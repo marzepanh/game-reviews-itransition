@@ -71,6 +71,19 @@ class ReviewsController extends AbstractController
                 $review->setCover($coverFileName);
             }
 
+            /** @var UploadedFile $images */
+            $images = $form->get('images')->getData();
+/*                        echo "<pre>";
+            var_dump($images); die;*/
+            if ($images) {
+                $uploadedFiles = [];
+                foreach ($images as $image) {
+                    $imageFileName = $fileUploader->upload($image);
+                    array_push($uploadedFiles, $imageFileName);
+                }
+                $review->setImages($uploadedFiles);
+            }
+
             $review->setAuthor($user->getEmail());
             $review->setUsersGrade(0);
             $review->setLikesAmount(0);

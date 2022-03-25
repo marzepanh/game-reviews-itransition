@@ -12,7 +12,7 @@ class MainController extends AbstractController
     #[Route('/', name: 'main')]
     public function index(ReviewRepository $reviewRepository): Response
     {
-        $lastReviews = $reviewRepository->findBy([], ['id' => 'DESC'], 6, 0);
+        $lastReviews = $reviewRepository->findBy(['isDeleted' => false], ['id' => 'DESC'], 6, 0);
         $popularReviews = $reviewRepository->findByLikesAmount();
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',

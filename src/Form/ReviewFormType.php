@@ -54,7 +54,11 @@ class ReviewFormType extends AbstractType
                     'rows' => '15'
                 ],
             ])
-            ->add('images', TextType::class) //FileType
+            ->add('images', FileType::class, [
+                'mapped' => false,
+                'multiple' => true,
+                'required' => false
+            ]) //FileType
             ->add('authorGrade', NumberType::class, [
                 'row_attr' => [
                     'class' => 'form-control',

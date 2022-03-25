@@ -25,6 +25,7 @@ class ReviewRepository extends ServiceEntityRepository
     public function findByLikesAmount()
     {
         return $this->createQueryBuilder('r')
+            ->andWhere('r.isDeleted = false')
             ->orderBy('r.likesAmount', 'DESC')
             ->setMaxResults(6)
             ->getQuery()
