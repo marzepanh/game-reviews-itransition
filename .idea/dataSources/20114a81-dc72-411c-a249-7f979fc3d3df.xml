@@ -742,11 +742,11 @@ heroku_2bb690225087d74|schema||bbb7a25c503ffe||UPDATE|G</Grants>
       <Engine>InnoDB</Engine>
       <CollationName>utf8_general_ci</CollationName>
     </table>
-    <table id="227" parent="221" name="review_tags">
+    <table id="227" parent="221" name="review_tag">
       <Engine>InnoDB</Engine>
       <CollationName>utf8_general_ci</CollationName>
     </table>
-    <table id="228" parent="221" name="tags">
+    <table id="228" parent="221" name="tag">
       <Engine>InnoDB</Engine>
       <CollationName>utf8_general_ci</CollationName>
     </table>
@@ -860,93 +860,65 @@ heroku_2bb690225087d74|schema||bbb7a25c503ffe||UPDATE|G</Grants>
     </key>
     <column id="251" parent="227" name="review_id">
       <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>1</Position>
     </column>
-    <column id="252" parent="227" name="tags_id">
+    <column id="252" parent="227" name="tag_id">
       <DataType>int(11)|0s</DataType>
-      <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <foreign-key id="253" parent="227" name="FK_8D08D93E3E2E969B">
-      <ColNames>review_id</ColNames>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>id</RefColNames>
-      <RefTableName>review</RefTableName>
-    </foreign-key>
-    <foreign-key id="254" parent="227" name="FK_8D08D93E8D7B4FB4">
-      <ColNames>tags_id</ColNames>
-      <OnDelete>cascade</OnDelete>
-      <RefColNames>id</RefColNames>
-      <RefTableName>tags</RefTableName>
-    </foreign-key>
-    <index id="255" parent="227" name="IDX_8D08D93E3E2E969B">
-      <ColNames>review_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <index id="256" parent="227" name="IDX_8D08D93E8D7B4FB4">
-      <ColNames>tags_id</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="257" parent="227" name="PRIMARY">
-      <ColNames>review_id
-tags_id</ColNames>
-      <NameSurrogate>1</NameSurrogate>
-      <Primary>1</Primary>
-    </key>
-    <column id="258" parent="228" name="id">
+    <column id="253" parent="228" name="id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="259" parent="228" name="name">
+    <column id="254" parent="228" name="name">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <key id="260" parent="228" name="PRIMARY">
+    <key id="255" parent="228" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <column id="261" parent="229" name="id">
+    <column id="256" parent="229" name="id">
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>1</Position>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="262" parent="229" name="email">
+    <column id="257" parent="229" name="email">
       <DataType>varchar(180)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>2</Position>
     </column>
-    <column id="263" parent="229" name="roles">
+    <column id="258" parent="229" name="roles">
       <DataType>longtext|0s</DataType>
       <NotNull>1</NotNull>
       <Position>3</Position>
     </column>
-    <column id="264" parent="229" name="password">
+    <column id="259" parent="229" name="password">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>4</Position>
     </column>
-    <column id="265" parent="229" name="facebook_id">
+    <column id="260" parent="229" name="facebook_id">
       <DataType>varchar(255)|0s</DataType>
       <NotNull>1</NotNull>
       <Position>5</Position>
     </column>
-    <index id="266" parent="229" name="UNIQ_8D93D649E7927C74">
+    <index id="261" parent="229" name="UNIQ_8D93D649E7927C74">
       <ColNames>email</ColNames>
       <Type>btree</Type>
       <Unique>1</Unique>
     </index>
-    <key id="267" parent="229" name="PRIMARY">
+    <key id="262" parent="229" name="PRIMARY">
       <ColNames>id</ColNames>
       <NameSurrogate>1</NameSurrogate>
       <Primary>1</Primary>
     </key>
-    <key id="268" parent="229" name="UNIQ_8D93D649E7927C74">
+    <key id="263" parent="229" name="UNIQ_8D93D649E7927C74">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>UNIQ_8D93D649E7927C74</UnderlyingIndexName>
     </key>

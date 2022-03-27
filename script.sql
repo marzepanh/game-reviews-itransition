@@ -51,15 +51,15 @@ create table review_tags
         foreign key (review_id) references review (id)
             on delete cascade,
     constraint FK_8D08D93E8D7B4FB4
-        foreign key (tags_id) references tags (id)
+        foreign key (tags_id) references tag (id)
             on delete cascade
 );
 
 create index IDX_8D08D93E3E2E969B
-    on review_tags (review_id);
+    on review_tag (review_id);
 
 create index IDX_8D08D93E8D7B4FB4
-    on review_tags (tags_id);
+    on review_tag (tags_id);
 
 create table user
 (
