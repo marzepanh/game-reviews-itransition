@@ -53,7 +53,7 @@ class Review
     #[ORM\Column(type: 'boolean')]
     private $isDeleted;
 
-    #[ORM\ManyToMany(targetEntity: Tags::class, inversedBy: 'reviews')]
+    #[ORM\ManyToMany(targetEntity: Tag::class, inversedBy: 'reviews')]
     private $reviewTags;
 
     #[ORM\Column(type: 'array', nullable: true)]
@@ -180,14 +180,14 @@ class Review
     }
 
     /**
-     * @return Collection<int, Tags>
+     * @return Collection<int, Tag>
      */
     public function getReviewTags(): Collection
     {
         return $this->reviewTags;
     }
 
-    public function addReviewTag(Tags $reviewTag): self
+    public function addReviewTag(Tag $reviewTag): self
     {
         if (!$this->reviewTags->contains($reviewTag)) {
             $this->reviewTags[] = $reviewTag;
@@ -196,11 +196,18 @@ class Review
         return $this;
     }
 
-    public function removeReviewTag(Tags $reviewTag): self
+    public function removeReviewTag(Tag $reviewTag): self
     {
         $this->reviewTags->removeElement($reviewTag);
 
         return $this;
+    }
+
+    public function cleanReviewTags()
+    {
+        foreach ($this->reviewTags as $tag) {
+            $this->removeReviewTag($tag);
+        }
     }
 
     public function getImages(): ?array

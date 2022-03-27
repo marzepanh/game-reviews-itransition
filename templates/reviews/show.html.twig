@@ -19,8 +19,9 @@
                         <div class="text-muted fst-italic mb-2">Category: {{ review.category }}</div>
                         <div class="text-muted fst-italic mb-2">Posted by {{ review.author|split('@')[0] }}</div>
                         <!-- Post categories-->
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Web Design</a>
-                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">Freebies</a>
+                        {% for tag in review.reviewTags %}
+                        <a class="badge bg-secondary text-decoration-none link-light" href="#!">{{ tag.name }}</a>
+                        {% endfor %}
                     </header>
                     <!-- Preview image figure-->
                     <figure class="mb-4"><img class="img-fluid rounded" src="{{ asset('uploads/' ~ review.cover) }}" width="900" height="400" alt="Review"/></figure>
@@ -70,7 +71,7 @@
             <!-- Side widgets-->
             <div class="col-lg-4">
                 <!-- Search widget-->
-                <div class="card mb-4">
+{#                <div class="card mb-4">
                     <div class="card-header">Search</div>
                     <div class="card-body">
                         <div class="input-group">
@@ -78,7 +79,7 @@
                             <button class="btn btn-primary" id="button-search" type="button">Go!</button>
                         </div>
                     </div>
-                </div>
+                </div>#}
                 <!-- Categories widget-->
                 <div class="card mb-4">
                     <div class="card-header">Categories</div>
@@ -86,16 +87,15 @@
                         <div class="row">
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">Web Design</a></li>
-                                    <li><a href="#!">HTML</a></li>
-                                    <li><a href="#!">Freebies</a></li>
+                                    <li><a href="#!">Games </a></li>
+                                    <li><a href="#!">Films</a></li>
+
                                 </ul>
                             </div>
                             <div class="col-sm-6">
                                 <ul class="list-unstyled mb-0">
-                                    <li><a href="#!">JavaScript</a></li>
-                                    <li><a href="#!">CSS</a></li>
-                                    <li><a href="#!">Tutorials</a></li>
+                                    <li><a href="#!">Serials</a></li>
+                                    <li><a href="#!">Books</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -103,8 +103,8 @@
                 </div>
                 <!-- Side widget-->
                 <div class="card mb-4">
-                    <div class="card-header">Side Widget</div>
-                    <div class="card-body">You can put anything you want inside of these side widgets. They are easy to use, and feature the Bootstrap 5 card component!</div>
+                    <div class="card-header">Posted by {{ review.author|split('@')[0] }}</div>
+                    <div class="card-body">Author grade {{ review.authorGrade }}/5</div>
                 </div>
             </div>
         </div>

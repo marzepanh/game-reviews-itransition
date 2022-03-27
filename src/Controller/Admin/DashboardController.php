@@ -9,6 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
+use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use EasyCorp\Bundle\EasyAdminBundle\Router\AdminUrlGenerator;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
@@ -61,8 +62,12 @@ class DashboardController extends AbstractDashboardController
 
     public function configureActions(): Actions
     {
+/*        $link = Action::new('linkToEditReviews', 'Edit reviews', 'fa fa-file-invoice')
+        ->linkToRoute('reviews_list');*/
+
         return parent::configureActions()
             ->add(Crud::PAGE_INDEX, Action::DETAIL);
+/*            ->add(Crud::PAGE_DETAIL, $link);*/
     }
 
 }

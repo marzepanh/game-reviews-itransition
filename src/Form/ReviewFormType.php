@@ -48,7 +48,9 @@ class ReviewFormType extends AbstractType
             ->add('category', EntityType::class, [
                 'class' => 'App\Entity\Category'
             ])
-            ->add('reviewTags', CollectionType::class)
+            ->add('reviewTags', TextType::class, [
+                'mapped' => false,
+            ])
             ->add('text', TextareaType::class, [
                 'attr' => [
                     'rows' => '15'

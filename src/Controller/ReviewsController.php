@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Config\ReviewGroup;
 use App\Entity\Review;
+use App\Entity\Tag;
 use App\Entity\User;
 use App\Form\ReviewFormType;
 use App\Repository\ReviewRepository;
@@ -19,8 +20,8 @@ use Symfony\Component\Routing\Annotation\Route;
  * @Route("/reviews", name="reviews_")
  * Class ReviewsController
  * @package App\Controller
+ * @var User $user
  */
-
 
 class ReviewsController extends AbstractController
 {
@@ -33,7 +34,6 @@ class ReviewsController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
 
-        /** @var User $user */
         $user = $this->getUser();
 
         $reviews = $reviewRepository->findBy(['author' => $user->getEmail(), 'isDeleted' => false]);
@@ -51,7 +51,7 @@ class ReviewsController extends AbstractController
      */
     public function edit(ManagerRegistry $doctrine, Request $request, FileUploader $fileUploader, Review $review = null): Response
     {
-        /** @var User $user */
+
         $user = $this->getUser();
 
         $entityManager = $doctrine->getManager();
@@ -61,20 +61,15 @@ class ReviewsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $review = $form->getData();
 
-            //upload cover
+            //upload files
             /** @var UploadedFile $cover */
             $cover = $form->get('cover')->getData();
-/*            echo "<pre>";
-            var_dump($cover); die;*/
             if ($cover) {
                 $coverFileName = $fileUploader->upload($cover);
                 $review->setCover($coverFileName);
             }
-
             /** @var UploadedFile $images */
             $images = $form->get('images')->getData();
-/*                        echo "<pre>";
-            var_dump($images); die;*/
             if ($images) {
                 $uploadedFiles = [];
                 foreach ($images as $image) {
@@ -82,6 +77,17 @@ class ReviewsController extends AbstractController
                     array_push($uploadedFiles, $imageFileName);
                 }
                 $review->setImages($uploadedFiles);
+            }
+
+            $tags = explode(',', $form->all()['reviewTags']->getData());
+            $review->cleanReviewTags();
+
+            foreach ($tags as $tag) {
+                $tmp_tag = new Tag();
+                $tmp_tag->setName($tag);
+
+                $review->addReviewTag($tmp_tag);
+                $entityManager->persist($tmp_tag);
             }
 
             $review->setAuthor($user->getEmail());
@@ -104,11 +110,15 @@ class ReviewsController extends AbstractController
      */
     public function delete(ManagerRegistry $doctrine, Review $review): Response
     {
+        $user = $this->getUser();
+
         $entityManager = $doctrine->getManager();
 
-        $review->setIsDeleted(true);
-        $entityManager->persist($review);
-        $entityManager->flush();
+        if ($user == $review->getAuthor() || in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+            $review->setIsDeleted(true);
+            $entityManager->persist($review);
+            $entityManager->flush();
+        }
 
         return $this->redirectToRoute('reviews_reviews_list');
     }
