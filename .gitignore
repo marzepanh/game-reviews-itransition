@@ -19,4 +19,4 @@
 ###< phpunit/phpunit ###
 
 # idea
-/.idea/
+.idea
